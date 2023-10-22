@@ -1,9 +1,22 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.src">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.src" xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage"/>
    <application
-        android:label="src"
+        android:label="RFO"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <provider android:name="androidx.core.content.FileProvider"
+                  android:authorities="${applicationId}.fileProvider"
+                  android:exported="false"
+                  android:grantUriPermissions="true"
+                  tools:replace="android:authorities">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                       android:resource="@xml/filepaths"
+                       tools:replace="android:resource" />
+        </provider>
         <activity
             android:name=".MainActivity"
             android:exported="true"
